@@ -11,10 +11,10 @@ const education = [
     location: "Pimpri, Pune",
     duration: "2021 - 2025",
     align: "left",
-    summary: "Coursework included Data Science, AI in Robotics, and Neural Networks for intelligent automation and robotics.",
+    summary: "Coursework included Data Science, Robot Operating Systems (ROS), AI and Artificial Neural Networks for intelligent Automation & Robotics.",
   },
   {
-    title: "Higher Secondary - Science",
+    title: "Higher Secondary - Science (CS)",
     company: "Shree Shivaji High School",
     location: "Dongaon, Maharashtra",
     duration: "2019 - 2021",
