@@ -5,37 +5,45 @@ import { FaBars } from "react-icons/fa";
 
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const [showHeader, setShowHeader] = useState(true);
 
-  /* =========================
-     ADD BACKGROUND ON SCROLL
-  ========================= */
   useEffect(() => {
+    let lastScrollY = window.scrollY;
+
     const handleScroll = () => {
-      setScrolled(window.scrollY > 40);
+      const currentScrollY = window.scrollY;
+
+      // hide when scrolling down
+      if (currentScrollY > lastScrollY && currentScrollY > 120) {
+        setShowHeader(false);
+      } else {
+        setShowHeader(true);
+      }
+
+      lastScrollY = currentScrollY;
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
     <>
       <header
-        className={`fixed top-0 left-0 w-full z-40 transition-all duration-300
-        ${scrolled ? "bg-black/70 backdrop-blur-md shadow-md" : "bg-transparent"}`}
+        className={`fixed top-6 left-0 w-full z-40 flex justify-center
+        transition-transform duration-300
+        ${showHeader ? "translate-y-0" : "-translate-y-24"}`}
       >
-        {/* CENTERED CONTAINER */}
-        <div className="relative flex items-center justify-center py-4 px-6">
+        {/* Floating pill navbar */}
+        <div className="relative">
 
-          {/* Centered Desktop Navbar */}
           <Navbar />
 
-          {/* Mobile Hamburger (right aligned) */}
+          {/* Mobile Hamburger */}
           <button
             aria-label="Open menu"
             onClick={() => setMenuOpen(true)}
-            className="md:hidden absolute right-6 text-white text-3xl active:scale-90 transition"
+            className="md:hidden absolute right-0 top-1/2 -translate-y-1/2 text-white text-3xl"
           >
             <FaBars />
           </button>
@@ -43,7 +51,6 @@ function Header() {
         </div>
       </header>
 
-      {/* Mobile Menu */}
       <MobileMenu menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
     </>
   );
