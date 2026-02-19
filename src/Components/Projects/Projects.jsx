@@ -48,16 +48,12 @@ const Projects = () => {
       prev === 0 ? projects.length - 1 : prev - 1
     );
 
-  /* ======================
-     SWIPE SUPPORT (MOBILE)
-  ====================== */
   const handleTouchStart = (e) => {
     touchStartX.current = e.touches[0].clientX;
   };
 
   const handleTouchEnd = (e) => {
     const diff = touchStartX.current - e.changedTouches[0].clientX;
-
     if (diff > 50) handleNext();
     if (diff < -50) handlePrev();
   };
@@ -65,11 +61,11 @@ const Projects = () => {
   return (
     <section
       id="projects"
-      className="relative flex flex-col md:flex-row min-h-screen bg-red-900 text-white px-6 py-16 overflow-hidden touch-pan-y"
+      className="relative flex flex-col md:flex-row min-h-screen bg-red-900 text-white px-6 py-14 overflow-hidden touch-pan-y"
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
-      {/* SIDE NAVIGATION (DESKTOP) */}
+      {/* SIDE NAVIGATION */}
       <div className="hidden md:flex md:w-1/4 flex-col justify-center">
         <motion.div
           initial={{ opacity: 0, x: -60 }}
@@ -111,20 +107,22 @@ const Projects = () => {
         <AnimatePresence mode="wait">
           <motion.div
             key={selectedProject.id}
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -30 }}
+            exit={{ opacity: 0, y: -25 }}
             transition={{ duration: 0.35 }}
             className="relative"
           >
+            {/* IMAGE — viewport balanced height */}
             <img
               src={selectedProject.image}
               alt={selectedProject.name}
               loading="lazy"
-              className="w-full max-h-[65vh] object-cover rounded-xl shadow-lg"
+              className="w-full h-[58vh] md:h-[72vh] object-cover rounded-xl shadow-lg"
             />
 
-            <div className="md:absolute bottom-0 w-full p-5 md:bg-red-900/90 md:rounded-b-xl">
+            {/* GLASS OVERLAY (unchanged) */}
+            <div className="md:absolute bottom-0 w-full p-5 md:bg-red-900/80 md:backdrop-blur-md md:rounded-b-xl">
               <h2 className="text-2xl font-bold mb-2">
                 {selectedProject.name}
               </h2>
@@ -148,38 +146,31 @@ const Projects = () => {
 
               {/* ACTION BUTTONS */}
               <div className="flex flex-wrap gap-3">
-                {selectedProject.github && (
-                  <a
-                    href={selectedProject.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 bg-black px-4 py-2 rounded-lg
-                    hover:scale-105 transition"
-                  >
-                    <FaGithub /> GitHub
-                  </a>
-                )}
+                <a
+                  href={selectedProject.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 bg-black px-4 py-2 rounded-lg hover:scale-105 transition"
+                >
+                  <FaGithub /> GitHub
+                </a>
 
-                {selectedProject.live && (
-                  <a
-                    href={selectedProject.live}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 bg-green-600 px-4 py-2 rounded-lg
-                    hover:scale-105 transition"
-                  >
-                    <FaExternalLinkAlt /> Live
-                  </a>
-                )}
+                <a
+                  href={selectedProject.live}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 bg-green-600 px-4 py-2 rounded-lg hover:scale-105 transition"
+                >
+                  <FaExternalLinkAlt /> Live
+                </a>
               </div>
             </div>
           </motion.div>
         </AnimatePresence>
 
-        {/* MOBILE NAVIGATION BUTTONS */}
+        {/* MOBILE ARROWS */}
         <button
           onClick={handlePrev}
-          aria-label="Previous project"
           className="md:hidden absolute left-3 top-1/2 -translate-y-1/2
           bg-white/20 hover:bg-white hover:text-black text-3xl rounded-full p-2 transition"
         >
@@ -188,7 +179,6 @@ const Projects = () => {
 
         <button
           onClick={handleNext}
-          aria-label="Next project"
           className="md:hidden absolute right-3 top-1/2 -translate-y-1/2
           bg-white/20 hover:bg-white hover:text-black text-3xl rounded-full p-2 transition"
         >
