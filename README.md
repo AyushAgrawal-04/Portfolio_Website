@@ -2,8 +2,8 @@
 
 A modern, responsive portfolio showcasing my projects, skills, and experience with smooth animations and a clean UI.
 
-🌐 Live: https://ayush-agrawal-eta.vercel.app/
-📁 Repo: https://github.com/AyushAgrawal-04/Ayush_Agrawal.git
+* 🌐 Live: https://ayush-agrawal-eta.vercel.app/
+* 📁 Repo: https://github.com/AyushAgrawal-04/Ayush_Agrawal.git
 
 ---
 
@@ -72,8 +72,8 @@ Edit content in:
 ## Author
 
 Ayush Agrawal
-*LinkedIn: https://linkedin.com/in/ayush-agrawal-75658a229
-*GitHub: https://github.com/AyushAgrawal-04
+* LinkedIn: https://linkedin.com/in/ayush-agrawal-75658a229
+* GitHub: https://github.com/AyushAgrawal-04
 
 ---
 
