@@ -3,6 +3,9 @@ import emailjs from "@emailjs/browser";
 import { motion } from "framer-motion";
 import { FaEnvelope, FaPhone, FaMapMarkerAlt } from "react-icons/fa";
 
+/* ✅ Initialize EmailJS */
+emailjs.init("jFshlkPFrvbkh280H");
+
 export default function Contact() {
   const formRef = useRef(null);
 
@@ -19,16 +22,15 @@ export default function Contact() {
 
     try {
       await emailjs.sendForm(
-        "service_190hdcr",
-        "template_bafi61r",
-        formRef.current,
-        "PUFLDL1B51xBdNbBM"
+        "service_aql535j",       // ✅ NEW SERVICE ID
+        "Portfolio_contactMe",   // ✅ TEMPLATE ID
+        formRef.current
       );
 
       setStatus("Message sent successfully!");
       formRef.current.reset();
     } catch (error) {
-      console.error(error);
+      console.error("EmailJS Error:", error);
       setStatus("Failed to send message. Please try again.");
     }
 
@@ -37,12 +39,10 @@ export default function Contact() {
 
   return (
     <section id="contact" className="bg-red-900 text-white py-16 px-6">
-      {/* SECTION TITLE */}
       <motion.h2
         className="text-3xl sm:text-4xl font-bold text-center mb-10"
         initial={{ opacity: 0, y: -20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
       >
         Contact Me
       </motion.h2>
@@ -53,30 +53,22 @@ export default function Contact() {
           className="bg-black/90 p-7 rounded-xl shadow-lg"
           initial={{ opacity: 0, x: -40 }}
           whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5 }}
         >
           <h3 className="text-xl font-semibold mb-4">Get In Touch</h3>
 
-          <p className="text-gray-300 mb-6 leading-relaxed">
-            Feel free to reach out for collaboration, freelance work, or just a
-            friendly hello 👋
-          </p>
-
-          <div className="space-y-4">
+          <div className="space-y-4 text-gray-300">
             <div className="flex items-center gap-3">
-              <FaEnvelope className="text-red-500 text-lg" />
-              <span className="break-all">
-                ayushmagrawal.76@gmail.com
-              </span>
+              <FaEnvelope className="text-red-500" />
+              <span className="break-all">ayushmagrawal.76@gmail.com</span>
             </div>
 
             <div className="flex items-center gap-3">
-              <FaPhone className="text-red-500 text-lg" />
+              <FaPhone className="text-red-500" />
               <span>+91 76669 72175</span>
             </div>
 
             <div className="flex items-center gap-3">
-              <FaMapMarkerAlt className="text-red-500 text-lg" />
+              <FaMapMarkerAlt className="text-red-500" />
               <span>Pune, Maharashtra</span>
             </div>
           </div>
@@ -89,66 +81,43 @@ export default function Contact() {
           className="bg-black/90 p-7 rounded-xl shadow-lg"
           initial={{ opacity: 0, x: 40 }}
           whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5 }}
         >
           <h3 className="text-xl font-semibold text-center mb-6">
             Drop a Message
           </h3>
 
-          {/* NAME */}
-          <div className="mb-4">
-            <label className="block text-sm mb-2">Your Name</label>
-            <input
-              type="text"
-              name="user_name"
-              required
-              placeholder="Enter your name"
-              className="w-full px-4 py-3 rounded-lg bg-gray-900 border border-gray-700
-              focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500
-              text-white transition"
-            />
-          </div>
+          <input
+            type="text"
+            name="user_name"
+            placeholder="Your Name"
+            required
+            className="w-full mb-4 px-4 py-3 rounded-lg bg-gray-900 border border-gray-700 focus:border-red-500 outline-none"
+          />
 
-          {/* EMAIL */}
-          <div className="mb-4">
-            <label className="block text-sm mb-2">Your Email</label>
-            <input
-              type="email"
-              name="user_email"
-              required
-              placeholder="Enter your email"
-              className="w-full px-4 py-3 rounded-lg bg-gray-900 border border-gray-700
-              focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500
-              text-white transition"
-            />
-          </div>
+          <input
+            type="email"
+            name="user_email"
+            placeholder="Your Email"
+            required
+            className="w-full mb-4 px-4 py-3 rounded-lg bg-gray-900 border border-gray-700 focus:border-red-500 outline-none"
+          />
 
-          {/* MESSAGE */}
-          <div className="mb-6">
-            <label className="block text-sm mb-2">Message</label>
-            <textarea
-              name="message"
-              required
-              rows="4"
-              placeholder="Write your message..."
-              className="w-full px-4 py-3 rounded-lg bg-gray-900 border border-gray-700
-              focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500
-              text-white transition resize-none"
-            ></textarea>
-          </div>
+          <textarea
+            name="message"
+            rows="4"
+            placeholder="Your Message"
+            required
+            className="w-full mb-6 px-4 py-3 rounded-lg bg-gray-900 border border-gray-700 focus:border-red-500 outline-none resize-none"
+          ></textarea>
 
-          {/* SUBMIT BUTTON */}
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3 rounded-lg font-semibold bg-red-500
-            hover:bg-red-600 active:scale-95 transition
-            disabled:opacity-60 disabled:cursor-not-allowed"
+            className="w-full py-3 rounded-lg font-semibold bg-red-500 hover:bg-red-600 transition disabled:opacity-60"
           >
             {loading ? "Sending..." : "Send Message"}
           </button>
 
-          {/* STATUS MESSAGE */}
           {status && (
             <p
               className={`text-center mt-4 text-sm ${
